@@ -23,20 +23,15 @@ class Triangle{
     
     vertices = new PVector[]{a, b, c};
     
-    centroid = new PVector();
-    normal = new PVector();
-    
     computeCentroid();
     computeNormal();
   }
   
   public Triangle computeCentroid(){
     centroid = new PVector();
-    centroid.x = a.x + b.x + c.x;
-    centroid.y = a.y + b.y + c.y;
-    centroid.z = a.z + b.z + c.z;
-    
-    PVector.div(centroid, 3);
+    centroid.x = (a.x + b.x + c.x) / 3;
+    centroid.y = (a.y + b.y + c.y) / 3;
+    centroid.z = (a.z + b.z + c.z) / 3;
     
     return this;
   }
@@ -44,7 +39,7 @@ class Triangle{
   public Triangle computeNormal(){
     u = PVector.sub(b, a);
     v = PVector.sub(c, a);
-    PVector.cross(u, v, normal);
+    normal = PVector.cross(u, v, normal);
     normal.normalize();
     
     return this;

@@ -34,7 +34,7 @@ class Mesh{
         for(int l = lights.size() - 1; l >= 0; l--){
           light = lights.get(l);
           
-          PVector.sub(light.position, triangle.centroid, light.ray);
+          light.ray = PVector.sub(light.position, triangle.centroid);
           light.ray.normalize();
           float illuminance = PVector.dot(triangle.normal, light.ray);
           if(side == FSS.FRONT){
@@ -45,15 +45,16 @@ class Mesh{
             illuminance = max(abs(illuminance), 0);
           }
           
-          rgba.multiplyVectors(material.slave, material.ambient, light.ambient);
-          rgba.add(triangle._color, material.slave);
+          material.slave = blendColor(material.ambient, light.ambient, MULTIPLY);
+          triangle._color = blendColor(triangle._color, material.slave, ADD);
           
-          rgba.multiplyVectors(material.slave, material.diffuse, light.diffuse);
-          rgba.multiplyScalar(material.slave, illuminance);
-          rgba.add(triangle._color, material.slave);
+          material.slave = blendColor(material.diffuse, light.diffuse, MULTIPLY);
+          //material.slave = blendColor(material.slave, color(illuminance, illuminance, illuminance, illuminance), MULTIPLY);
+          material.slave = rgba.multiplyScalar(material.slave, illuminance);
+          triangle._color = blendColor(triangle._color, material.slave, ADD);
         }
         
-        rgba.clamp(triangle._color, 0, 1);
+        //triangle._color = rgba.clamp(triangle._color, 0, 1);
       }
     }
     

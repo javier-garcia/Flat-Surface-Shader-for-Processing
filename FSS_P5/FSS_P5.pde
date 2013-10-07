@@ -11,7 +11,7 @@ void setup(){
   rgba = new RGBA();
   scene = new Scene();
   light = new Light(#111122, #FF0022);
-  geometry = new Plane(600, 400, 20, 20);
+  geometry = new Plane(600, 400, 6, 4);
   material = new Material(#FFFFFF, #FFFFFF);
   mesh = new Mesh(geometry, material);
   renderer = new Renderer();
@@ -21,10 +21,8 @@ void setup(){
   
   start = millis();
   
-  size(600, 400);
+  size(600, 400, P3D);
   renderer.setSize(600, 400);
-  
-  //println(scene.lights.size());
 }
 
 void draw(){  
