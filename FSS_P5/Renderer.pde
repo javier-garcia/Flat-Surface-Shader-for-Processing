@@ -45,6 +45,8 @@ class Renderer{
           Color = triangle._color;
           
           beginShape();
+          stroke(255);
+          fill(Color);
           vertex(triangle.a.x, triangle.a.y);
           vertex(triangle.b.x, triangle.b.y);
           vertex(triangle.c.x, triangle.c.y);

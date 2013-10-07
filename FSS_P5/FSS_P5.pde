@@ -11,7 +11,7 @@ void setup(){
   rgba = new RGBA();
   scene = new Scene();
   light = new Light(#111122, #FF0022);
-  geometry = new Plane(600, 400, 6, 4);
+  geometry = new Plane(600, 400, 20, 20);
   material = new Material(#FFFFFF, #FFFFFF);
   mesh = new Mesh(geometry, material);
   renderer = new Renderer();
@@ -27,7 +27,7 @@ void setup(){
   //println(scene.lights.size());
 }
 
-void draw(){
+void draw(){  
   now = millis() - start;
   light.setPosition(new PVector(300*sin(now*0.001), 200*cos(now*0.0005), 60));
   renderer.render(scene);
